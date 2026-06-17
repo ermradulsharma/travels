@@ -1,3 +1,5 @@
+![Tripdhara Banner](assets/img/og-banner.png)
+
 # 🌊 Tripdhara - Premium Himalayan Travel & Stay Bookings
 
 Tripdhara is a high-performance, modern, and fully responsive single-page Progressive Web App (PWA) designed for a premium travel booking and itinerary planning agency in the Himalayas. It showcases handpicked adventure services, stays, resorts, and packages across Uttarakhand and Himachal Pradesh.
