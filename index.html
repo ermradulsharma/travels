@@ -74,6 +74,91 @@
             });
         }
     </script>
+
+    <!-- 10. Structured SEO Schema Markup (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Tripdhara",
+      "image": "https://www.tripdhara.com/assets/img/og-banner.png",
+      "@id": "https://www.tripdhara.com/#agency",
+      "url": "https://www.tripdhara.com/",
+      "telephone": "+919536489063",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Uttarakhand",
+        "addressLocality": "Dehradun",
+        "addressRegion": "Uttarakhand",
+        "postalCode": "248001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.3165,
+        "longitude": 78.0322
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://wa.me/919536489063"
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What documents do I need to rent a self-drive bike?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You need a valid Two-Wheeler Driving License, a Government ID (Aadhaar or Passport), and a refundable security deposit. Original documents must be presented at pick-up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your car rentals self-drive or chauffeur-driven?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All our cars are strictly chauffeur-driven. We do not provide self-drive cars for safety compliance on twisting and steep mountain roads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does ground assistance work in case of issues?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide 24/7 ground assistance. In case of road closures, vehicle issues, or weather warnings, our local support network coordinates instantly to keep your trip on track."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I customize a travel package?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply select the \"Travel Packages\" tab in our booking form, select your desired theme, and submit. Our local itinerary planner will connect with you on WhatsApp to design your custom path."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
