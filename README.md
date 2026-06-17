@@ -1,78 +1,76 @@
-# PahadiGo - Premium Himalayan Travel & Stay Bookings
+# 🌊 Tripdhara - Premium Himalayan Travel & Stay Bookings
 
-PahadiGo is a modern, responsive, and high-performance single-page landing page designed for a premium travel booking and itinerary planning agency in the Himalayas. It showcases services across Uttarakhand and Himachal Pradesh, including chauffeur-driven SUVs, adventure rentals, stays/resorts, and tailored packages.
+Tripdhara is a high-performance, modern, and fully responsive single-page Progressive Web App (PWA) designed for a premium travel booking and itinerary planning agency in the Himalayas. It showcases handpicked adventure services, stays, resorts, and packages across Uttarakhand and Himachal Pradesh.
 
----
-
-## 🚀 Live Demo & Deployment
-This project is fully ready for deployment on **Vercel** or any static hosting provider.
-* **Direct Redirection**: Integrates seamlessly with WhatsApp Business API to compile inquiries and direct clients to start booking.
+Built with clean architecture, search engine optimization, and offline capabilities, Tripdhara delivers a premium application experience with zero framework overhead.
 
 ---
 
-## ✨ Features
+## 🚀 Key Features
 
-- **Premium Responsive Design**: Built with custom HSL design tokens, modern Outfit/Inter typography, premium dark gradients, and elegant glassmorphism accents.
-- **Interactive Form Cost Estimators**: Dynamic client-side pricing calculators for each booking tab:
-  - **Chauffeur Cars**: Calculates price depending on chosen SUV type and duration.
-  - **Self-Drive Bikes**: Calculates price depending on cruiser/adventure model and rental days.
-  - **Stays & Resorts**: Computes estimate based on category and nights.
-  - **Travel Packages**: Calculates total package cost depending on theme and group size.
-- **Interactive Testimonials Carousel**: Custom-built sliding testimonials slider with arrows and indicators for premium transitions.
-- **Interactive FAQ Accordion**: Responsive question drawers providing direct answers on documents, ground support, and booking policies.
-- **Himalayan Live Weather Forecast**: Integrates with the open-source Open-Meteo API to fetch and render live, real-time temperatures and weather conditions for key destinations (Rishikesh, Mukteshwar, Manali, Auli).
-- **SEO & Google Rich Snippets Integration**: Embedded valid JSON-LD metadata for search engine optimization:
-  - `TravelAgency` Schema (includes coordinates, phone number, operating hours, and social profiles).
-  - `FAQPage` Schema (exposes FAQ accordion directly to search engine rich result blocks).
+### 📱 1. Mobile-First Responsive Layout
+- **Horizontal Scrollable Tabs:** Custom-designed booking selector tabs that scroll horizontally on mobile screens rather than wrapping, keeping margins, borders, and layouts clean.
+- **Adaptive Navigation Header:** The navigation CTA hides contact numbers on smaller viewports, displaying only the phone icon to prevent layout clutter.
+- **Responsive Grids & Typography:** Fluid layout grids (Services, Why Choose Us, Gallery, and Weather widgets) that seamlessly stack (e.g. from 4 columns to 2 columns on tablets, and 1 column on mobile devices).
+- **Parallax Scroll Optimizations:** Smooth scrolling experience on touch devices by disabling resource-intensive desktop parallax effects on tablets and mobile screens (`background-attachment: scroll`).
+
+### 👆 2. Touch Swipe Gestures
+- **Native Testimonial Carousel:** Supports touch-drag swiping gestures (`touchstart` and `touchend` events) for native carousel navigation on mobile devices.
+- **Responsive Slide Navigation:** Navigation arrows are hidden on smaller screens to avoid viewport boundaries, allowing users to scroll by swiping or clicking dots.
+
+### 📶 3. PWA & Offline Support
+- **Service Worker (`sw.js`):** Intercepts fetches and caches essential core assets (`/`, `/index.html`, `/index.css`, `/index.js`) to load pages instantly on sub-optimal networks or offline.
+- **Web App Manifest (`site.webmanifest`):** Fully configured installation parameters (maskable icons, brand colors, standalone display, and shortcuts) matching premium Android & iOS standards.
+
+### ⚡ 4. High-Performance Architecture
+- **No Layout Thrashing:** Section offsets and heights are cached on page load and window resize, preventing costly reflows/forced layouts inside high-frequency scroll event loops.
+- **Pure CSS Transitions:** Decoupled layout states (e.g., sticky headers and visual reveals) using CSS class changes (`.scrolled`) rather than JS style injection.
+
+### ☀️ 5. Live Destination Weather Widget
+- Fetches real-time temperatures and conditions (Sunny, Rainy, Snowy, etc.) for key Himalayan destinations (Rishikesh, Mukteshwar, Manali, Auli) using the Open-Meteo API.
 
 ---
 
 ## 🛠️ Technology Stack
 
-This project is built using native, lightweight web technologies with **zero frameworks, build compilations, or external runtime dependencies**:
-
-- **HTML5**: Semantic tags for maximum markup readability.
-- **CSS3 (Vanilla)**: Responsive styling with flexbox/grid layouts and media queries.
-- **JavaScript (ES6+)**: Custom dynamic state manager, scroll reveal intersection observers, form estimators, and weather APIs.
+- **HTML5**: Semantic elements and structured tagging.
+- **CSS3**: Layouts powered by CSS grid, flexbox, custom HSL design variables, and fluid typography.
+- **JavaScript (ES6+)**: Custom dynamic state manager, intersection observers, and swiping handlers.
+- **Service Worker**: Cache storage operations for offline capabilities.
 
 ---
 
 ## 💻 Local Development
 
-Since this is a static project, you can run it directly:
+Run the project locally without any installation or build configurations:
 
-### Option 1: Direct File Opening
-Double-click `index.html` to load the website inside any web browser.
-
-### Option 2: Live Local Server
-Start a lightweight static server for hot-reloads and local network sharing:
-
-Using **Node.js**:
-```bash
-npx http-server -p 3000
-```
+### Option 1: Live Server (Recommended)
+Launch a local server for direct testing (which handles service workers correctly):
 
 Using **Python**:
 ```bash
 python -m http.server 3000
 ```
+
+Using **Node.js**:
+```bash
+npx http-server -p 3000
+```
 Open `http://localhost:3000` in your web browser.
+
+### Option 2: Direct File Opening
+Double-click `index.html` to open the page directly. Note: Service workers and API calls might require a local HTTP origin to load correctly in modern browsers.
 
 ---
 
-## 📦 Deployment to Vercel
+## 📦 Deployment
 
-You can deploy the site instantly in 2 minutes:
+This static site is ready to deploy on any hosting provider in seconds:
 
-### Using Vercel CLI
-1. Open terminal inside the project folder.
-2. Run command:
+### Deploy to Vercel
+1. Install Vercel CLI: `npm i -g vercel`
+2. Run command inside root folder:
    ```bash
-   npx vercel
+   vercel
    ```
-3. Authenticate, choose **"Create new project"**, and select all default configurations. Vercel automatically detects the static configuration and puts it live.
-
-### Using GitHub Integration
-1. Push this code to your GitHub repository.
-2. Import the repository in your [Vercel Dashboard](https://vercel.com).
-3. Click **"Deploy"**. Future code pushes to GitHub will redeploy the website automatically.
+3. Keep default settings, and your site is live!

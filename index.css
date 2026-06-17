@@ -147,6 +147,12 @@ textarea {
     transition: all 0.3s ease;
 }
 
+/* .navbar.scrolled {
+    background: rgba(5, 13, 10, 0.9);
+    padding: 10px 25px;
+    border-bottom: 1px solid rgba(245, 166, 35, 0.3);
+} */
+
 .logo-link {
     font-family: var(--font-heading);
     font-size: 1.5rem;
@@ -179,6 +185,12 @@ textarea {
 .nav-link.active {
     color: var(--text-primary);
     background: rgba(245, 166, 35, 0.1);
+}
+
+.nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .cta-btn-nav {
@@ -958,6 +970,10 @@ section {
 
 /* Responsive Styles for Mobile, Tablet and Large Screen Sizes */
 @media (max-width: 1024px) {
+    .hero-section {
+        background-attachment: scroll;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
         max-width: 650px;
@@ -985,6 +1001,18 @@ section {
         font-size: 15px;
     }
 
+    section {
+        padding: 60px 0;
+    }
+
+    .section-header {
+        margin-bottom: 35px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
     .header {
         top: 0;
         width: 100%;
@@ -997,6 +1025,10 @@ section {
         border-top: none;
         padding: 15px 20px;
     }
+
+    /* .navbar.scrolled {
+        padding: 10px 20px;
+    } */
 
     .nav-menu {
         position: fixed;
@@ -1012,6 +1044,7 @@ section {
         gap: 40px;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 999;
+        overflow-y: auto;
     }
 
     .nav-menu.open {
@@ -1036,7 +1069,7 @@ section {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
 
     .hero-subtitle {
@@ -1057,18 +1090,43 @@ section {
     }
 
     .booking-tabs {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .booking-tabs::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
     }
 
     .tab-btn {
-        flex: unset;
-        width: 50%;
+        flex: 0 0 auto;
+        width: auto;
+        white-space: nowrap;
+        padding: 15px 20px;
         font-size: 0.9rem;
+        border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn.active {
+        border-bottom: 2px solid var(--primary);
+    }
+
+    .slider-arrow {
+        display: none !important;
     }
 
     .footer-container {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .footer-bottom-flex {
+        justify-content: center;
+        text-align: center;
     }
 }
 
@@ -1445,6 +1503,11 @@ section {
         margin: 0 auto;
     }
 
+    .why-us-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
     .faq-question {
         padding: 20px 24px;
         font-size: 1.05rem;
@@ -1452,6 +1515,44 @@ section {
 
     .faq-answer p {
         padding: 0 24px 20px 24px;
+    }
+
+    .cta-text-nav {
+        display: none;
+    }
+
+    .cta-btn-nav {
+        padding: 10px;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .hero-content {
+        margin-top: 40px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        width: 100%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    section {
+        padding: 45px 0;
     }
 
     .whatsapp-float-widget {
@@ -1697,4 +1798,4 @@ section {
     .gallery-card {
         height: 280px;
     }
-}
+}

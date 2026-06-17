@@ -20,32 +20,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 navMenu.classList.remove('open');
             });
         });
+
+        // Close mobile menu when clicking the logo link
+        const logoLink = document.querySelector('.logo-link');
+        if (logoLink) {
+            logoLink.addEventListener('click', () => {
+                mobileToggle.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        }
     }
 
-    // 2. Active Class on Scroll & Sticky Header
+    // 2. Active Class on Scroll & Sticky Header (Optimized with class toggling and offset caching)
     const navbar = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section');
+    let sectionOffsets = [];
+
+    function cacheSectionOffsets() {
+        sectionOffsets = [];
+        sections.forEach(section => {
+            const id = section.getAttribute('id');
+            if (id) {
+                sectionOffsets.push({
+                    id: id,
+                    top: section.offsetTop
+                });
+            }
+        });
+    }
+
+    // Cache offsets on load and update them on resize to avoid reading offsetTop on scroll
+    cacheSectionOffsets();
+    window.addEventListener('resize', cacheSectionOffsets);
 
     window.addEventListener('scroll', () => {
-        // Sticky Header effect
+        // Sticky Header effect via class toggle
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(5, 13, 10, 0.9)';
-            navbar.style.padding = '10px 25px';
-            navbar.style.borderBottom = '1px solid rgba(245, 166, 35, 0.3)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(10, 20, 16, 0.7)';
-            navbar.style.padding = '15px 30px';
-            navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.15)';
+            navbar.classList.remove('scrolled');
         }
 
-        // Highlight Active Link depending on Scroll position
+        // Highlight Active Link based on cached scroll positions
         let current = '';
-        const sections = document.querySelectorAll('section');
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
+        sectionOffsets.forEach(sec => {
+            if (window.scrollY >= (sec.top - 250)) {
+                current = sec.id;
             }
         });
 
@@ -176,12 +196,40 @@ document.addEventListener('DOMContentLoaded', () => {
         startAutoslide();
     }
 
+    // Touch swipe controls for mobile
+    if (track) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Threshold in pixels
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swiped left, show next slide
+                updateSlider(currentIndex + 1);
+                resetAutoslide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                // Swiped right, show previous slide
+                updateSlider(currentIndex - 1);
+                resetAutoslide();
+            }
+        }
+    }
+
     if (track && cards.length > 0) {
         startAutoslide();
     }
 
     // 9. Booking Inquiry Compilation & WhatsApp Redirection
-    const recipientPhone = "917017288052";
+    const recipientPhone = "919536489063";
 
     // Form 1: Chauffeur Cars
     const formCars = document.getElementById('form-cars');
@@ -195,14 +243,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = document.getElementById('car-days').value;
             const route = document.getElementById('car-route').value;
 
-            const message = `*PahadiGo Booking Inquiry - Chauffeur Cars*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Chauffeur Cars*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
                 `• *Vehicle Type:* ${type}\n` +
                 `• *Pick-up Date:* ${date}\n` +
                 `• *Duration:* ${days} Day(s)\n` +
                 `• *Route / Destination:* ${route}\n\n` +
-                `_Inquiry sent via PahadiGo.com_`;
+                `_Inquiry sent via Tripdhara.com_`;
 
             sendWhatsAppInquiry(message);
         });
@@ -220,14 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = document.getElementById('bike-days').value;
             const loc = document.getElementById('bike-loc').value;
 
-            const message = `*PahadiGo Booking Inquiry - Self-Drive Bikes*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Self-Drive Bikes*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
                 `• *Preferred Bike:* ${model}\n` +
                 `• *Start Date:* ${date}\n` +
                 `• *Duration:* ${days} Day(s)\n` +
                 `• *Pick-up Location:* ${loc}\n\n` +
-                `_Inquiry sent via PahadiGo.com_`;
+                `_Inquiry sent via Tripdhara.com_`;
 
             sendWhatsAppInquiry(message);
         });
@@ -246,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const guests = document.getElementById('resort-guests').value;
             const dest = document.getElementById('resort-dest').value;
 
-            const message = `*PahadiGo Booking Inquiry - Resorts & Stays*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Resorts & Stays*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
                 `• *Stay Category:* ${type}\n` +
@@ -254,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `• *Duration:* ${nights} Night(s)\n` +
                 `• *Number of Guests:* ${guests}\n` +
                 `• *Destination Region:* ${dest}\n\n` +
-                `_Inquiry sent via PahadiGo.com_`;
+                `_Inquiry sent via Tripdhara.com_`;
 
             sendWhatsAppInquiry(message);
         });
@@ -272,14 +320,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = document.getElementById('package-days').value;
             const members = document.getElementById('package-members').value;
 
-            const message = `*PahadiGo Booking Inquiry - Travel Packages*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Travel Packages*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
                 `• *Package Theme:* ${theme}\n` +
                 `• *Travel Date:* ${date}\n` +
                 `• *Duration:* ${days} Day(s)\n` +
                 `• *Group Size:* ${members} Member(s)\n\n` +
-                `_Inquiry sent via PahadiGo.com_`;
+                `_Inquiry sent via Tripdhara.com_`;
 
             sendWhatsAppInquiry(message);
         });
