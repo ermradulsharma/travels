@@ -562,14 +562,7 @@
                 <div class="booking-container animate-scroll">
                     <!-- Tabs Header -->
                     <div class="booking-tabs" id="booking-tabs">
-                        <button class="tab-btn active" data-tab="travel">
-                            <svg viewBox="0 0 24 24" width="16" height="16">
-                                <path fill="currentColor"
-                                    d="M18.92 11.01C18.72 10.42 18.16 10 17.5 10H6.5C5.84 10 5.28 10.42 5.08 11.01L3 17V24C3 24.55 3.45 25 4 25H5C5.55 25 6 24.55 6 24V22H18V24C18 24.55 18.45 25 19 25H20C20.55 25 21 24.55 21 24V17L18.92 11.01M6.5 12H17.5L18.9 16H5.1L6.5 12M7.5 18C8.33 18 9 17.33 9 16.5C9 15.67 8.33 15 7.5 15C6.67 15 6 15.67 6 16.5C6 17.33 6.67 18 7.5 18M16.5 18C17.33 18 18 17.33 18 16.5C18 15.67 17.33 15 16.5 15C15.67 15 15 15.67 15 16.5C15 17.33 15.67 18 16.5 18M2 2H22V8H2V2M4 4V6H20V4H4Z" />
-                            </svg>
-                            Travel
-                        </button>
-                        <button class="tab-btn" data-tab="accommodation">
+                        <button class="tab-btn active" data-tab="accommodation">
                             <svg viewBox="0 0 24 24" width="16" height="16">
                                 <path fill="currentColor"
                                     d="M19 7H11V5A2 2 0 0 0 9 3H5A2 2 0 0 0 3 5V19A2 2 0 0 0 5 21H19A2 2 0 0 0 21 19V9A2 2 0 0 0 19 7M9 5V7H5V5H9M5 9H9V11H5V9M5 13H9V15H5V13M5 17H9V19H5V17M19 19H11V17H19V19M19 15H11V13H19V15M19 11H11V9H19V11Z" />
@@ -583,6 +576,13 @@
                             </svg>
                             Activity
                         </button>
+                        <button class="tab-btn" data-tab="travel">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path fill="currentColor"
+                                    d="M18.92 11.01C18.72 10.42 18.16 10 17.5 10H6.5C5.84 10 5.28 10.42 5.08 11.01L3 17V24C3 24.55 3.45 25 4 25H5C5.55 25 6 24.55 6 24V22H18V24C18 24.55 18.45 25 19 25H20C20.55 25 21 24.55 21 24V17L18.92 11.01M6.5 12H17.5L18.9 16H5.1L6.5 12M7.5 18C8.33 18 9 17.33 9 16.5C9 15.67 8.33 15 7.5 15C6.67 15 6 15.67 6 16.5C6 17.33 6.67 18 7.5 18M16.5 18C17.33 18 18 17.33 18 16.5C18 15.67 17.33 15 16.5 15C15.67 15 15 15.67 15 16.5C15 17.33 15.67 18 16.5 18M2 2H22V8H2V2M4 4V6H20V4H4Z" />
+                            </svg>
+                            Travel
+                        </button>
                         <button class="tab-btn" data-tab="package">
                             <svg viewBox="0 0 24 24" width="16" height="16">
                                 <path fill="currentColor"
@@ -594,51 +594,8 @@
 
                     <!-- Tab Content Wrapper -->
                     <div class="booking-content">
-                        <!-- TRAVEL FORM -->
-                        <div class="tab-content active" id="tab-travel">
-                            <form class="booking-form" id="form-travel">
-                                <div class="form-grid">
-                                    <div class="input-group">
-                                        <label for="travel-name">Full Name</label>
-                                        <input type="text" id="travel-name" required placeholder="John Doe">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-phone">Mobile Number</label>
-                                        <input type="tel" id="travel-phone" required placeholder="e.g. +91 98765 43210">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-type">Preferred Travel Option</label>
-                                        <select id="travel-type">
-                                            <option value="Chauffeur-driven Car">Chauffeur-driven Car</option>
-                                            <option value="Car Rental">Car Rental (Self-Drive)</option>
-                                            <option value="Bike Rental">Bike Rental (Self-Drive)</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-vehicle">Preferred Vehicle / Model</label>
-                                        <input type="text" id="travel-vehicle" placeholder="e.g. Fortuner / Himalayan 450 / Innova" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-date">Start Date</label>
-                                        <input type="date" id="travel-date" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-days">Duration (Days)</label>
-                                        <input type="number" id="travel-days" min="1" value="3" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="travel-route">Planned Route / Destination</label>
-                                        <input type="text" id="travel-route" placeholder="e.g. Dehradun to Mussoorie" required>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-submit">
-                                    Send Travel Inquiry on WhatsApp
-                                </button>
-                            </form>
-                        </div>
-
                         <!-- ACCOMMODATION FORM -->
-                        <div class="tab-content" id="tab-accommodation">
+                        <div class="tab-content active" id="tab-accommodation">
                             <form class="booking-form" id="form-accommodation">
                                 <div class="form-grid">
                                     <div class="input-group">
@@ -652,9 +609,9 @@
                                     <div class="input-group">
                                         <label for="accommodation-type">Accommodation Type</label>
                                         <select id="accommodation-type">
-                                            <option value="Homestay">Cozy Homestay</option>
-                                            <option value="Hotel">Boutique Hotel / Luxury Resort</option>
-                                            <option value="Camping">Adventure Camping / Glamping</option>
+                                            <option value="Homestay">Homestay</option>
+                                            <option value="Hotel">Hotel</option>
+                                            <option value="Camping">Camping</option>
                                         </select>
                                     </div>
                                     <div class="input-group">
@@ -696,7 +653,7 @@
                                         <label for="activity-type">Preferred Activity</label>
                                         <select id="activity-type">
                                             <option value="Trekking">Trekking</option>
-                                            <option value="Rafting">White-water Rafting</option>
+                                            <option value="Rafting">Rafting</option>
                                             <option value="Bungee Jumping">Bungee Jumping</option>
                                             <option value="Paragliding">Paragliding</option>
                                         </select>
@@ -716,6 +673,49 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-submit">
                                     Send Activity Inquiry on WhatsApp
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- TRAVEL FORM -->
+                        <div class="tab-content" id="tab-travel">
+                            <form class="booking-form" id="form-travel">
+                                <div class="form-grid">
+                                    <div class="input-group">
+                                        <label for="travel-name">Full Name</label>
+                                        <input type="text" id="travel-name" required placeholder="John Doe">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-phone">Mobile Number</label>
+                                        <input type="tel" id="travel-phone" required placeholder="e.g. +91 98765 43210">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-type">Preferred Travel Option</label>
+                                        <select id="travel-type">
+                                            <option value="Car Rental">Car Rental</option>
+                                            <option value="Bike Rental">Bike Rental</option>
+                                            <option value="Chauffeur-driven Car">Chauffeur-driven Car</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-vehicle">Preferred Vehicle / Model</label>
+                                        <input type="text" id="travel-vehicle" placeholder="e.g. Fortuner / Himalayan 450 / Innova" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-date">Start Date</label>
+                                        <input type="date" id="travel-date" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-days">Duration (Days)</label>
+                                        <input type="number" id="travel-days" min="1" value="3" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="travel-route">Planned Route / Destination</label>
+                                        <input type="text" id="travel-route" placeholder="e.g. Dehradun to Mussoorie" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    Send Travel Inquiry on WhatsApp
                                 </button>
                             </form>
                         </div>
