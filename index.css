@@ -531,6 +531,85 @@ section {
     transform: translateX(5px);
 }
 
+/* Services Comparison Table (GEO & SEO Optimization) */
+.services-comparison-box {
+    margin-top: 50px;
+    padding: 35px 30px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+}
+
+.comparison-table-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+}
+
+.comparison-table-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-gradient);
+    margin: 8px auto 0 auto;
+    border-radius: var(--radius-sm);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+}
+
+.services-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    min-width: 800px;
+}
+
+.services-comparison-table th,
+.services-comparison-table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+    vertical-align: middle;
+}
+
+.services-comparison-table th {
+    background-color: rgba(10, 20, 16, 0.4);
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.services-comparison-table tr {
+    transition: background-color 0.3s ease;
+}
+
+.services-comparison-table tr:hover {
+    background-color: rgba(245, 166, 35, 0.02);
+}
+
+.services-comparison-table td strong {
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
 /* Why Choose Us Section */
 .why-us-section {
     background-color: var(--bg-base);

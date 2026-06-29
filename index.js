@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollElements.forEach(el => scrollObserver.observe(el));
     // 5. Form Validations (Dynamic Date Constraints & Mobile numbers validation)
     const todayStr = new Date().toISOString().split('T')[0];
-    ['car-date', 'bike-date', 'resort-checkin', 'package-date'].forEach(id => {
+    ['travel-date', 'accommodation-checkin', 'activity-date', 'package-date'].forEach(id => {
         const input = document.getElementById(id);
         if (input) {
             input.setAttribute('min', todayStr);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return phoneRegex.test(cleanPhone);
     }
 
-    ['car-phone', 'bike-phone', 'resort-phone', 'package-phone'].forEach(id => {
+    ['travel-phone', 'accommodation-phone', 'activity-phone', 'package-phone'].forEach(id => {
         const input = document.getElementById(id);
         if (input) {
             input.addEventListener('input', () => {
@@ -231,23 +231,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 9. Booking Inquiry Compilation & WhatsApp Redirection
     const recipientPhone = "919536489063";
 
-    // Form 1: Chauffeur Cars
-    const formCars = document.getElementById('form-cars');
-    if (formCars) {
-        formCars.addEventListener('submit', (e) => {
+    // Form 1: Travel Services
+    const formTravel = document.getElementById('form-travel');
+    if (formTravel) {
+        formTravel.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('car-name').value;
-            const phone = document.getElementById('car-phone').value;
-            const type = document.getElementById('car-type').value;
-            const date = document.getElementById('car-date').value;
-            const days = document.getElementById('car-days').value;
-            const route = document.getElementById('car-route').value;
+            const name = document.getElementById('travel-name').value;
+            const phone = document.getElementById('travel-phone').value;
+            const type = document.getElementById('travel-type').value;
+            const vehicle = document.getElementById('travel-vehicle').value;
+            const date = document.getElementById('travel-date').value;
+            const days = document.getElementById('travel-days').value;
+            const route = document.getElementById('travel-route').value;
 
-            const message = `*Tripdhara Booking Inquiry - Chauffeur Cars*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Travel Services*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
-                `• *Vehicle Type:* ${type}\n` +
-                `• *Pick-up Date:* ${date}\n` +
+                `• *Travel Option:* ${type}\n` +
+                `• *Vehicle Preference:* ${vehicle}\n` +
+                `• *Start Date:* ${date}\n` +
                 `• *Duration:* ${days} Day(s)\n` +
                 `• *Route / Destination:* ${route}\n\n` +
                 `_Inquiry sent via Tripdhara.com_`;
@@ -256,48 +258,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Form 2: Self-Drive Bikes
-    const formBikes = document.getElementById('form-bikes');
-    if (formBikes) {
-        formBikes.addEventListener('submit', (e) => {
+    // Form 2: Accommodation
+    const formAccommodation = document.getElementById('form-accommodation');
+    if (formAccommodation) {
+        formAccommodation.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('bike-name').value;
-            const phone = document.getElementById('bike-phone').value;
-            const model = document.getElementById('bike-model').value;
-            const date = document.getElementById('bike-date').value;
-            const days = document.getElementById('bike-days').value;
-            const loc = document.getElementById('bike-loc').value;
+            const name = document.getElementById('accommodation-name').value;
+            const phone = document.getElementById('accommodation-phone').value;
+            const type = document.getElementById('accommodation-type').value;
+            const checkin = document.getElementById('accommodation-checkin').value;
+            const nights = document.getElementById('accommodation-nights').value;
+            const guests = document.getElementById('accommodation-guests').value;
+            const dest = document.getElementById('accommodation-dest').value;
 
-            const message = `*Tripdhara Booking Inquiry - Self-Drive Bikes*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Accommodation*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
-                `• *Preferred Bike:* ${model}\n` +
-                `• *Start Date:* ${date}\n` +
-                `• *Duration:* ${days} Day(s)\n` +
-                `• *Pick-up Location:* ${loc}\n\n` +
-                `_Inquiry sent via Tripdhara.com_`;
-
-            sendWhatsAppInquiry(message);
-        });
-    }
-
-    // Form 3: Stays & Resorts
-    const formResorts = document.getElementById('form-resorts');
-    if (formResorts) {
-        formResorts.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('resort-name').value;
-            const phone = document.getElementById('resort-phone').value;
-            const type = document.getElementById('resort-type').value;
-            const checkin = document.getElementById('resort-checkin').value;
-            const nights = document.getElementById('resort-nights').value;
-            const guests = document.getElementById('resort-guests').value;
-            const dest = document.getElementById('resort-dest').value;
-
-            const message = `*Tripdhara Booking Inquiry - Resorts & Stays*\n\n` +
-                `• *Client Name:* ${name}\n` +
-                `• *Contact Phone:* ${phone}\n` +
-                `• *Stay Category:* ${type}\n` +
+                `• *Stay Type:* ${type}\n` +
                 `• *Check-in Date:* ${checkin}\n` +
                 `• *Duration:* ${nights} Night(s)\n` +
                 `• *Number of Guests:* ${guests}\n` +
@@ -308,22 +285,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Form 4: Travel Packages
-    const formPackages = document.getElementById('form-packages');
-    if (formPackages) {
-        formPackages.addEventListener('submit', (e) => {
+    // Form 3: Activity
+    const formActivity = document.getElementById('form-activity');
+    if (formActivity) {
+        formActivity.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('activity-name').value;
+            const phone = document.getElementById('activity-phone').value;
+            const type = document.getElementById('activity-type').value;
+            const date = document.getElementById('activity-date').value;
+            const members = document.getElementById('activity-members').value;
+            const loc = document.getElementById('activity-loc').value;
+
+            const message = `*Tripdhara Booking Inquiry - Activity*\n\n` +
+                `• *Client Name:* ${name}\n` +
+                `• *Contact Phone:* ${phone}\n` +
+                `• *Preferred Activity:* ${type}\n` +
+                `• *Activity Date:* ${date}\n` +
+                `• *Group Size:* ${members} Person(s)\n` +
+                `• *Preferred Location:* ${loc}\n\n` +
+                `_Inquiry sent via Tripdhara.com_`;
+
+            sendWhatsAppInquiry(message);
+        });
+    }
+
+    // Form 4: Package
+    const formPackage = document.getElementById('form-package');
+    if (formPackage) {
+        formPackage.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('package-name').value;
             const phone = document.getElementById('package-phone').value;
-            const theme = document.getElementById('package-theme').value;
+            const type = document.getElementById('package-type').value;
             const date = document.getElementById('package-date').value;
             const days = document.getElementById('package-days').value;
             const members = document.getElementById('package-members').value;
 
-            const message = `*Tripdhara Booking Inquiry - Travel Packages*\n\n` +
+            const message = `*Tripdhara Booking Inquiry - Tour Package*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
-                `• *Package Theme:* ${theme}\n` +
+                `• *Package Type:* ${type}\n` +
                 `• *Travel Date:* ${date}\n` +
                 `• *Duration:* ${days} Day(s)\n` +
                 `• *Group Size:* ${members} Member(s)\n\n` +
@@ -344,12 +346,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        if (question) {
+        const answer = item.querySelector('.faq-answer');
+        if (question && answer) {
             question.addEventListener('click', () => {
                 const isOpen = item.classList.contains('active');
-                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Close all other FAQ items and update their ARIA attributes
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
+                    const q = i.querySelector('.faq-question');
+                    const a = i.querySelector('.faq-answer');
+                    if (q) q.setAttribute('aria-expanded', 'false');
+                    if (a) a.setAttribute('aria-hidden', 'true');
+                });
+                
+                // If the clicked FAQ item was not open, open it and update its ARIA attributes
                 if (!isOpen) {
                     item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
+                    answer.setAttribute('aria-hidden', 'false');
                 }
             });
         }
@@ -369,24 +384,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Autofill the input field based on the service
-            if (service === 'cars') {
-                const routeInput = document.getElementById('car-route');
-                if (routeInput) routeInput.value = targetRouteValue;
-            } else if (service === 'bikes') {
-                const locInput = document.getElementById('bike-loc');
-                if (locInput) locInput.value = targetRouteValue;
-            } else if (service === 'resorts') {
-                const destInput = document.getElementById('resort-dest');
-                if (destInput) destInput.value = targetRouteValue;
-            } else if (service === 'packages') {
-                const themeSelect = document.getElementById('package-theme');
-                if (themeSelect) {
-                    for (let option of themeSelect.options) {
-                        if (option.value === targetRouteValue) {
-                            themeSelect.value = targetRouteValue;
-                            break;
-                        }
+            if (service === 'travel') {
+                const typeSelect = document.getElementById('travel-type');
+                if (typeSelect) {
+                    typeSelect.value = targetRouteValue;
+                }
+                const routeInput = document.getElementById('travel-route');
+                if (routeInput) {
+                    if (targetRouteValue === 'Chauffeur-driven Car') {
+                        routeInput.value = "Dehradun to Mussoorie, Landour & Dhanaulti";
+                    } else if (targetRouteValue === 'Bike Rental') {
+                        routeInput.value = "Rishikesh to Chopta, Tungnath & Sari Village";
                     }
+                }
+            } else if (service === 'accommodation') {
+                const typeSelect = document.getElementById('accommodation-type');
+                if (typeSelect) {
+                    typeSelect.value = targetRouteValue;
+                }
+                const destInput = document.getElementById('accommodation-dest');
+                if (destInput) {
+                    destInput.value = "Mukteshwar / Manali";
+                }
+            } else if (service === 'activity') {
+                const typeSelect = document.getElementById('activity-type');
+                if (typeSelect) {
+                    typeSelect.value = targetRouteValue;
+                }
+                const locInput = document.getElementById('activity-loc');
+                if (locInput) {
+                    locInput.value = "Chopta / Rishikesh";
+                }
+            } else if (service === 'package') {
+                const typeSelect = document.getElementById('package-type');
+                if (typeSelect) {
+                    typeSelect.value = targetRouteValue;
                 }
             }
 

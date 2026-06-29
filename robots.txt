@@ -1,0 +1,36 @@
+# robots.txt for Tripdhara
+# Optimized for search engines and AI-powered answer engines
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.tripdhara.com/sitemap.xml
+
+# Allow AI crawlers to discover, scan, and parse the site and llms.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
