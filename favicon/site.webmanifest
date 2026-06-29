@@ -1,6 +1,15 @@
 {
   "name": "Tripdhara",
   "short_name": "Tripdhara",
+  "description": "Premium Himalayan travel bookings for accommodations, activities, vehicle rentals, and customized packages in Uttarakhand & Himachal.",
+  "lang": "en-US",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#050d0a",
+  "background_color": "#050d0a",
+  "categories": ["travel", "sports", "lifestyle"],
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png?v=20260617",
@@ -15,7 +24,16 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#050d0a",
-  "background_color": "#050d0a",
-  "display": "standalone"
+  "shortcuts": [
+    {
+      "name": "Book Travel",
+      "url": "/#booking",
+      "description": "Quickly book car rentals, bike rentals, and tour packages"
+    },
+    {
+      "name": "View Services",
+      "url": "/#services",
+      "description": "Explore all premium travel services"
+    }
+  ]
 }
