@@ -81,6 +81,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
+    const tabContentData = {
+        accommodation: {
+            image: 'url("assets/luxury_resort.png")',
+            tagline: 'Premium Stays & Resorts',
+            title: 'Handpicked Mountain Lodges',
+            desc: 'Escape to personally pre-inspected cozy homestays, premium wooden cottages, and luxury valley resorts with stunning peak views.',
+            stats: [
+                { val: '100%', lbl: 'Verified Stays' },
+                { val: '50+', lbl: 'Premium Stays' },
+                { val: '4.9★', lbl: 'Rated Stays' }
+            ]
+        },
+        activity: {
+            image: 'url("assets/hero_background.png")',
+            tagline: 'Adrenaline & Outdoors',
+            title: 'Conquer the Himalayan Wilds',
+            desc: 'Engage in thrilling activities led by certified local instructors: white-water rafting in Rishikesh, paragliding in Bir Billing, or trekking to the highest temple in Tungnath.',
+            stats: [
+                { val: '100%', lbl: 'Certified Guides' },
+                { val: '12+', lbl: 'Valley Trails' },
+                { val: 'Zero', lbl: 'Safety Issues' }
+            ]
+        },
+        travel: {
+            image: 'url("assets/adventure_bike.png")',
+            tagline: 'Mountain Transit Services',
+            title: 'Ride Free or Relax in Comfort',
+            desc: 'Navigate winding passes on a rugged Royal Enfield Himalayan 450, or sit back in a luxury SUV driven by a veteran mountain chauffeur.',
+            stats: [
+                { val: '50+', lbl: 'Bike Fleet' },
+                { val: '100%', lbl: 'Mountain Drivers' },
+                { val: '24/7', lbl: 'Roadside Assist' }
+            ]
+        },
+        package: {
+            image: 'url("assets/breathtaking-scenery-amazing-landscape-view_181624-19152.avif")',
+            tagline: 'Bespoke Tour Packages',
+            title: 'Curated Himalayan Journeys',
+            desc: 'Embark on the sacred Chardham pilgrimage or request a custom adventure itinerary tailored by local experts to match your group size and pace.',
+            stats: [
+                { val: '100%', lbl: 'Organized Plans' },
+                { val: '10k+', lbl: 'Pilgrims Guided' },
+                { val: 'Flexible', lbl: 'Re-routing' }
+            ]
+        }
+    };
+
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             // Remove active class from all buttons and contents
@@ -93,6 +140,154 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetContent = document.getElementById(`tab-${targetTab}`);
             if (targetContent) {
                 targetContent.classList.add('active');
+            }
+
+            // Dynamically update the split screen image panel content
+            const imageSide = document.getElementById('booking-image-side');
+            const taglineEl = document.getElementById('booking-image-tagline');
+            const titleEl = document.getElementById('booking-image-title');
+            const descEl = document.getElementById('booking-image-desc');
+            
+            if (imageSide && tabContentData[targetTab]) {
+                const data = tabContentData[targetTab];
+                // Smooth transition fade-out/fade-in
+                imageSide.style.opacity = '0.7';
+                imageSide.style.transform = 'scale(0.99)';
+                
+                setTimeout(() => {
+                    imageSide.style.backgroundImage = `linear-gradient(rgba(3, 8, 6, 0.45), rgba(3, 8, 6, 0.9)), ${data.image}`;
+                    if (taglineEl) taglineEl.textContent = data.tagline;
+                    if (titleEl) titleEl.textContent = data.title;
+                    if (descEl) descEl.textContent = data.desc;
+                    
+                    // Update stats
+                    data.stats.forEach((stat, index) => {
+                        const valEl = document.getElementById(`stat-val-${index + 1}`);
+                        const lblEl = document.getElementById(`stat-lbl-${index + 1}`);
+                        if (valEl) valEl.textContent = stat.val;
+                        if (lblEl) lblEl.textContent = stat.lbl;
+                    });
+                    
+                    imageSide.style.opacity = '1';
+                    imageSide.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+    });
+
+    // 3.5. Enhanced Booking Widget Helpers (Counters, Dynamic Selects, Suggestion Pills)
+    
+    // Custom Numeric Counter Widget Handler
+    const counterButtons = document.querySelectorAll('.counter-btn');
+    counterButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = btn.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (!input) return;
+
+            let val = parseInt(input.value) || 0;
+            const min = parseInt(input.getAttribute('min')) || 1;
+
+            if (btn.classList.contains('plus')) {
+                val++;
+            } else if (btn.classList.contains('minus')) {
+                if (val > min) val--;
+            }
+            input.value = val;
+            
+            // Trigger change event for custom counter updates
+            input.dispatchEvent(new Event('change'));
+        });
+    });
+
+    // Dynamic Selects Handler for Travel Option
+    const travelTypeSelect = document.getElementById('travel-type');
+    const travelVehicleGroup = document.getElementById('travel-vehicle-group');
+    const travelVehicleSelect = document.getElementById('travel-vehicle');
+    
+    if (travelTypeSelect && travelVehicleSelect && travelVehicleGroup) {
+        const vehicleOptions = {
+            cars: `
+                <option value="Premium SUV (Fortuner/Scorpio)">Premium SUV (Fortuner/Scorpio)</option>
+                <option value="Comfort MPV (Innova/Ertiga)">Comfort MPV (Innova/Ertiga)</option>
+                <option value="Sedan (Dzire/Etios)">Sedan (Dzire/Etios)</option>
+            `,
+            bikes: `
+                <option value="Royal Enfield Himalayan 450">Royal Enfield Himalayan 450</option>
+                <option value="Royal Enfield Classic 350">Royal Enfield Classic 350</option>
+                <option value="Hero XPulse 200">Hero XPulse 200</option>
+                <option value="KTM Adventure 390">KTM Adventure 390</option>
+            `
+        };
+
+        travelTypeSelect.addEventListener('change', () => {
+            const val = travelTypeSelect.value;
+            const label = travelVehicleGroup.querySelector('label');
+            
+            if (val === 'Bike Rental') {
+                if (label) label.textContent = 'Preferred Bike Model';
+                travelVehicleSelect.innerHTML = vehicleOptions.bikes;
+            } else {
+                if (label) label.textContent = 'Preferred Vehicle';
+                travelVehicleSelect.innerHTML = vehicleOptions.cars;
+            }
+        });
+    }
+
+    // Dynamic Selects Handler for Activities Options
+    const activityTypeSelect = document.getElementById('activity-type');
+    const activitySubtypeGroup = document.getElementById('activity-subtype-group');
+    const activitySubtypeLabel = document.getElementById('activity-subtype-label');
+    const activitySubtypeSelect = document.getElementById('activity-subtype');
+
+    if (activityTypeSelect && activitySubtypeSelect && activitySubtypeLabel) {
+        const activityOptions = {
+            Trekking: `
+                <option value="Tungnath-Chandrashila Trek">Tungnath-Chandrashila Trek</option>
+                <option value="Deoriatal Trek">Deoriatal Trek</option>
+                <option value="Valley of Flowers Trek">Valley of Flowers Trek</option>
+                <option value="Custom Trek Plan">Custom Trek Plan</option>
+            `,
+            Rafting: `
+                <option value="12 km Stretch (Basic Rapids)">12 km Stretch (Basic Rapids)</option>
+                <option value="16 km Stretch (Moderate Rapids)">16 km Stretch (Moderate Rapids)</option>
+                <option value="24 km Stretch (Adventure Rapids)">24 km Stretch (Adventure Rapids)</option>
+                <option value="36 km Stretch (Extreme Rapids)">36 km Stretch (Extreme Rapids)</option>
+            `,
+            'Bungee Jumping': `
+                <option value="83 meters Fixed-Platform Jump">83 meters Fixed-Platform Jump</option>
+                <option value="100 meters Ultra Platform Jump">100 meters Ultra Platform Jump</option>
+                <option value="Giant Canyon Swing">Giant Canyon Swing</option>
+                <option value="Extreme Flying Fox (Zipline)">Extreme Flying Fox (Zipline)</option>
+            `,
+            Paragliding: `
+                <option value="Standard Flight (15-20 Mins)">Standard Flight (15-20 Mins)</option>
+                <option value="High Altitude Flight (30-45 Mins)">High Altitude Flight (30-45 Mins)</option>
+                <option value="Bir Billing Tandem Flight">Bir Billing Tandem Flight</option>
+                <option value="Custom Aero Adventure Flight">Custom Aero Adventure Flight</option>
+            `
+        };
+
+        activityTypeSelect.addEventListener('change', () => {
+            const val = activityTypeSelect.value;
+            activitySubtypeLabel.textContent = `${val} Option`;
+            if (activityOptions[val]) {
+                activitySubtypeSelect.innerHTML = activityOptions[val];
+            }
+        });
+    }
+
+    // Clickable suggestion pills handler
+    const suggestionPills = document.querySelectorAll('.suggestion-pills .pill');
+    suggestionPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const parent = pill.parentElement;
+            const targetId = parent.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input) {
+                input.value = pill.textContent.trim();
+                input.dispatchEvent(new Event('input')); // trigger validations if any
             }
         });
     });
@@ -293,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('activity-name').value;
             const phone = document.getElementById('activity-phone').value;
             const type = document.getElementById('activity-type').value;
+            const subtype = document.getElementById('activity-subtype').value;
             const date = document.getElementById('activity-date').value;
             const members = document.getElementById('activity-members').value;
             const loc = document.getElementById('activity-loc').value;
@@ -300,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const message = `*Tripdhara Booking Inquiry - Activity*\n\n` +
                 `• *Client Name:* ${name}\n` +
                 `• *Contact Phone:* ${phone}\n` +
-                `• *Preferred Activity:* ${type}\n` +
+                `• *Preferred Activity:* ${type} - ${subtype}\n` +
                 `• *Activity Date:* ${date}\n` +
                 `• *Group Size:* ${members} Person(s)\n` +
                 `• *Preferred Location:* ${loc}\n\n` +
