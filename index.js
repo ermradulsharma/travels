@@ -130,12 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
+            // Remove active class and update ARIA attributes from all buttons and contents
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
             tabContents.forEach(content => content.classList.remove('active'));
 
-            // Add active class to clicked button and target content
+            // Add active class, set ARIA-selected, and show target content
             button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
             const targetTab = button.getAttribute('data-tab');
             const targetContent = document.getElementById(`tab-${targetTab}`);
             if (targetContent) {
@@ -535,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function sendWhatsAppInquiry(textMessage) {
         const encodedText = encodeURIComponent(textMessage);
         const waUrl = `https://wa.me/${recipientPhone}?text=${encodedText}`;
-        window.open(waUrl, '_blank');
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
     // 10. FAQ Accordion Collapse/Expand logic
