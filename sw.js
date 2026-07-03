@@ -1,18 +1,98 @@
-const CACHE_NAME = 'tripdhara-cache-v1';
-const urlsToCache = ['/', '/index.html', '/index.css', '/index.js'];
+const CACHE_NAME = "tripdhara-cache-v1";
+const urlsToCache = ["/", "index.html", "css/style.css", "js/main.js"];
 
-self.addEventListener('install', event => {
+// Install service worker and cache core static assets
+self.addEventListener("install", (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => {
+        caches.open(CACHE_NAME).then((cache) => {
+            console.log("Caching core app shell assets");
             return cache.addAll(urlsToCache);
-        })
+        }),
     );
 });
 
-self.addEventListener('fetch', event => {
+// Activate service worker and clear old caches
+self.addEventListener("activate", (event) => {
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log("Deleting old PWA cache:", cacheName);
+                        return caches.delete(cacheName);
+                    }
+                }),
+            );
+        }),
+    );
+    return self.clients.claim();
+});
+
+// Intercept requests and implement hybrid caching
+self.addEventListener("fetch", (event) => {
+    // Only cache GET requests
+    if (event.request.method !== "GET") return;
+
+    // 1. Navigation requests (HTML pages) -> Network-First
+    if (event.request.mode === "navigate") {
+        event.respondWith(
+            fetch(event.request)
+                .then((networkResponse) => {
+                    // Update cache with the fresh page
+                    if (networkResponse && networkResponse.status === 200) {
+                        const responseToCache = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return networkResponse;
+                })
+                .catch(() => {
+                    // Fallback to cache if offline
+                    return caches.match("index.html") || caches.match("/");
+                }),
+        );
+        return;
+    }
+
+    // 2. Static resources (CSS, JS, Images, Fonts) -> Cache-First
     event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
+        caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+
+            return fetch(event.request)
+                .then((networkResponse) => {
+                    // Check if response is valid
+                    if (
+                        !networkResponse ||
+                        networkResponse.status !== 200 ||
+                        (networkResponse.type !== "basic" &&
+                            networkResponse.type !== "cors")
+                    ) {
+                        return networkResponse;
+                    }
+
+                    // Dynamically cache images, local assets, and Google Fonts
+                    const requestUrl = event.request.url;
+                    if (
+                        requestUrl.includes("/assets/images/") ||
+                        requestUrl.includes("/favicon/") ||
+                        requestUrl.includes("fonts.gstatic.com") ||
+                        requestUrl.includes("fonts.googleapis.com")
+                    ) {
+                        const responseToCache = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+
+                    return networkResponse;
+                })
+                .catch(() => {
+                    // Fail gracefully
+                });
+        }),
     );
 });

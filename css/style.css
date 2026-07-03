@@ -21,8 +21,8 @@
     --text-secondary: #9cb1aa;
     --text-muted: #627770;
 
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: "Outfit", sans-serif;
+    --font-body: "Inter", sans-serif;
 
     --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     --shadow-glow: 0 0 20px rgba(245, 166, 35, 0.2);
@@ -114,7 +114,9 @@ textarea {
 .animate-scroll {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition:
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out;
 }
 
 .animate-scroll.revealed {
@@ -238,7 +240,7 @@ textarea {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    background-image: url('assets/hero_background.png');
+    background-image: url("../assets/images/hero_background.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -250,7 +252,11 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(9, 30, 22, 0.6) 0%, rgba(3, 10, 7, 0.9) 100%);
+    background: radial-gradient(
+        circle,
+        rgba(9, 30, 22, 0.6) 0%,
+        rgba(3, 10, 7, 0.9) 100%
+    );
     z-index: 1;
 }
 
@@ -477,7 +483,11 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, transparent 30%, rgba(3, 8, 6, 0.95) 100%);
+    background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(3, 8, 6, 0.95) 100%
+    );
 }
 
 .card-content {
@@ -555,7 +565,7 @@ section {
 }
 
 .comparison-table-title::after {
-    content: '';
+    content: "";
     display: block;
     width: 60px;
     height: 3px;
@@ -780,7 +790,11 @@ section {
 
 .btn-submit {
     width: 100%;
-    background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-green-hover) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--whatsapp-green) 0%,
+        var(--whatsapp-green-hover) 100%
+    );
     color: white;
     padding: 16px;
     border-radius: var(--radius-md);
@@ -858,7 +872,9 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-lg);
     padding: 40px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
     z-index: 2;
 }
@@ -1027,7 +1043,11 @@ section {
 }
 
 .btn-whatsapp {
-    background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-green-hover) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--whatsapp-green) 0%,
+        var(--whatsapp-green-hover) 100%
+    );
     color: white;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
 }
@@ -1316,7 +1336,9 @@ section {
     box-shadow: none;
     padding: 55px;
     margin: 0;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
 }
 
 .slider-arrow {
@@ -1585,7 +1607,11 @@ section {
     right: 30px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--whatsapp-green) 0%, var(--whatsapp-green-hover) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--whatsapp-green) 0%,
+        var(--whatsapp-green-hover) 100%
+    );
     color: white;
     border-radius: 50%;
     display: flex;
@@ -1734,14 +1760,13 @@ section {
 }
 
 @keyframes cursor-blink {
-
     from,
     to {
-        border-color: transparent
+        border-color: transparent;
     }
 
     50% {
-        border-color: var(--primary)
+        border-color: var(--primary);
     }
 }
 
@@ -1831,7 +1856,12 @@ section {
     left: 0;
     width: 100%;
     padding: 30px 24px;
-    background: linear-gradient(to top, rgba(5, 13, 10, 0.98) 0%, rgba(5, 13, 10, 0.7) 50%, transparent 100%);
+    background: linear-gradient(
+        to top,
+        rgba(5, 13, 10, 0.98) 0%,
+        rgba(5, 13, 10, 0.7) 50%,
+        transparent 100%
+    );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -2051,7 +2081,9 @@ section {
 
 /* Dynamic Hidden Selects Transition helper */
 .input-group {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 }
 
 /* Make wide input fields fill full row on larger form layouts */
@@ -2074,7 +2106,9 @@ section {
 
 .booking-image-side {
     position: relative;
-    background-image: linear-gradient(rgba(3, 8, 6, 0.45), rgba(3, 8, 6, 0.9)), url('assets/luxury_resort.png');
+    background-image:
+        linear-gradient(rgba(3, 8, 6, 0.45), rgba(3, 8, 6, 0.9)),
+        url("../assets/images/luxury_resort.png");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -2180,7 +2214,12 @@ section {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, rgba(42, 92, 74, 0.05) 50%, transparent 80%);
+    background: radial-gradient(
+        circle,
+        rgba(245, 166, 35, 0.08) 0%,
+        rgba(42, 92, 74, 0.05) 50%,
+        transparent 80%
+    );
     filter: blur(100px);
     pointer-events: none;
     z-index: 1;
@@ -2188,8 +2227,12 @@ section {
 }
 
 @keyframes floatGlow {
-    0% { transform: translate(-45%, -55%) scale(1); }
-    100% { transform: translate(-55%, -45%) scale(1.15); }
+    0% {
+        transform: translate(-45%, -55%) scale(1);
+    }
+    100% {
+        transform: translate(-55%, -45%) scale(1.15);
+    }
 }
 
 @media (max-width: 991px) {
@@ -2198,12 +2241,12 @@ section {
         gap: 35px;
         padding: 40px 30px;
     }
-    
+
     .testimonial-hero-phrase h3 {
         font-size: 1.8rem;
         line-height: 1.25;
     }
-    
+
     .testimonial-hero-phrase .quote-symbol {
         font-size: 6rem;
         top: -50px;
@@ -2215,11 +2258,11 @@ section {
         padding: 30px 15px;
         gap: 25px;
     }
-    
+
     .testimonial-hero-phrase h3 {
         font-size: 1.45rem;
     }
-    
+
     .testimonial-details {
         padding: 30px 20px;
     }
