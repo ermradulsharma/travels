@@ -112,21 +112,27 @@
         <link
             rel="icon"
             type="image/png"
-            href="/favicon/favicon-96x96.png"
+            href="/assets/favicon/favicon-96x96.png"
             sizes="96x96"
         />
         <link
             rel="icon"
             type="image/svg+xml"
-            href="/favicon/favicon.svg?v=20260617"
+            href="/assets/favicon/favicon.svg?v=20260617"
         />
-        <link rel="shortcut icon" href="/favicon/favicon.ico?v=20260617" />
+        <link
+            rel="shortcut icon"
+            href="/assets/favicon/favicon.ico?v=20260617"
+        />
         <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/favicon/apple-touch-icon.png?v=20260617"
+            href="/assets/favicon/apple-touch-icon.png?v=20260617"
         />
-        <link rel="manifest" href="/favicon/site.webmanifest?v=20260617" />
+        <link
+            rel="manifest"
+            href="/assets/favicon/site.webmanifest?v=20260617"
+        />
 
         <!-- 8. Fonts & Stylesheets -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -135,7 +141,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
 
         <!-- 9. App Installation Script (PWA Service Worker) -->
         <script>
@@ -588,7 +594,7 @@
                                     premium chauffeur-driven SUVs for ultimate
                                     safety.
                                 </p>
-                                <a href="#booking" class="service-link"
+                                <a href="services/travel/" class="service-link"
                                     >Explore Travel Options &rarr;</a
                                 >
                             </div>
@@ -633,7 +639,9 @@
                                     resorts with panoramic peak views, and
                                     scenic riverside alpine camps.
                                 </p>
-                                <a href="#booking" class="service-link"
+                                <a
+                                    href="services/accommodation/"
+                                    class="service-link"
                                     >Find Accommodations &rarr;</a
                                 >
                             </div>
@@ -678,7 +686,9 @@
                                     bungee jumping, and guided mountain treks
                                     across scenic valleys.
                                 </p>
-                                <a href="#booking" class="service-link"
+                                <a
+                                    href="services/activities/"
+                                    class="service-link"
                                     >Book Activities &rarr;</a
                                 >
                             </div>
@@ -710,18 +720,23 @@
                                         />
                                     </svg>
                                 </div>
-                                <h3>Tailored Tour Packages</h3>
+                                <h3>Bespoke Tour Packages</h3>
                                 <p class="service-emphasis">
-                                    Chardham Yatra • Custom Trips
+                                    Chardham Yatras • Adventure Treks • Custom
+                                    Getaways
                                 </p>
                                 <p>
                                     Fully organized mountain itineraries
-                                    designed by local experts. Book the sacred
-                                    Chardham pilgrimage yatra or design a
-                                    customized adventure getaway tailored to
-                                    your group size and pace.
+                                    designed by local experts. Book sacred
+                                    pilgrimages (Chardham, Kedarnath, Badrinath,
+                                    Gangotri, Yamunotri) or guided trekking
+                                    packages (Kedarnath trek, Vasuki Tal,
+                                    Triyuginarayan) tailored to your group size
+                                    and pace.
                                 </p>
-                                <a href="#booking" class="service-link"
+                                <a
+                                    href="services/packages/"
+                                    class="service-link"
                                     >Design My Package &rarr;</a
                                 >
                             </div>
@@ -1651,9 +1666,44 @@
                                                     >
                                                     <select id="package-type">
                                                         <option
-                                                            value="Chardham Tour"
+                                                            value="Chardham Yatra"
                                                         >
-                                                            Chardham Tour
+                                                            Chardham Yatra
+                                                        </option>
+                                                        <option
+                                                            value="Kedarnath Yatra"
+                                                        >
+                                                            Kedarnath Yatra
+                                                        </option>
+                                                        <option
+                                                            value="Badrinath Yatra"
+                                                        >
+                                                            Badrinath Yatra
+                                                        </option>
+                                                        <option
+                                                            value="Gangotri Yatra"
+                                                        >
+                                                            Gangotri Yatra
+                                                        </option>
+                                                        <option
+                                                            value="Yamunotri Yatra"
+                                                        >
+                                                            Yamunotri Yatra
+                                                        </option>
+                                                        <option
+                                                            value="Kedarnath Trek"
+                                                        >
+                                                            Kedarnath Trek
+                                                        </option>
+                                                        <option
+                                                            value="Vasuki Tal Trek"
+                                                        >
+                                                            Vasuki Tal Trek
+                                                        </option>
+                                                        <option
+                                                            value="Triyuginarayan Trek"
+                                                        >
+                                                            Triyuginarayan Trek
                                                         </option>
                                                         <option
                                                             value="Custom Trip"
@@ -2549,11 +2599,13 @@
                 <div class="footer-links-group">
                     <h5>Explore</h5>
                     <ul class="footer-links">
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#why-us">Why Us</a></li>
+                        <li>
+                            <a href="services/accommodation/">Accommodation</a>
+                        </li>
+                        <li><a href="services/activities/">Activities</a></li>
+                        <li><a href="services/travel/">Travel Services</a></li>
+                        <li><a href="services/packages/">Packages</a></li>
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#booking">Bookings</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
                     </ul>
                 </div>
 
@@ -2618,6 +2670,6 @@
         </a>
 
         <!-- Main Logic Script -->
-        <script src="js/main.js"></script>
+        <script src="assets/js/main.js"></script>
     </body>
 </html>

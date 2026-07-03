@@ -1,5 +1,18 @@
-const CACHE_NAME = "tripdhara-cache-v4";
-const urlsToCache = ["/", "index.html", "css/style.css", "js/main.js"];
+const CACHE_NAME = "tripdhara-cache-v9";
+const urlsToCache = [
+    "/",
+    "index.html",
+    "services/accommodation/",
+    "services/accommodation/index.html",
+    "services/activities/",
+    "services/activities/index.html",
+    "services/travel/",
+    "services/travel/index.html",
+    "services/packages/",
+    "services/packages/index.html",
+    "assets/css/style.css",
+    "assets/js/main.js",
+];
 
 // Install service worker and cache core static assets
 self.addEventListener("install", (event) => {
