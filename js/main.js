@@ -1,4 +1,17 @@
-// index.js
+// main.js
+
+// Defensive Google Analytics Event Tracker
+function trackEvent(eventName, params = {}) {
+    if (typeof gtag === "function") {
+        gtag("event", eventName, params);
+    } else {
+        console.log(
+            "Analytics blocked or not loaded. Event:",
+            eventName,
+            params,
+        );
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Mobile Navigation Menu Toggle
@@ -479,6 +492,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const days = document.getElementById("travel-days").value;
             const route = document.getElementById("travel-route").value;
 
+            // Track submission in Google Analytics
+            trackEvent("booking_form_submit", {
+                form_type: "travel",
+                vehicle_preference: vehicle,
+                duration_days: days,
+            });
+
             const message =
                 `*Tripdhara Booking Inquiry - Travel Services*\n\n` +
                 `• *Client Name:* ${name}\n` +
@@ -513,6 +533,14 @@ document.addEventListener("DOMContentLoaded", () => {
             ).value;
             const dest = document.getElementById("accommodation-dest").value;
 
+            // Track submission in Google Analytics
+            trackEvent("booking_form_submit", {
+                form_type: "accommodation",
+                stay_type: type,
+                duration_nights: nights,
+                guests_count: guests,
+            });
+
             const message =
                 `*Tripdhara Booking Inquiry - Accommodation*\n\n` +
                 `• *Client Name:* ${name}\n` +
@@ -541,6 +569,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const members = document.getElementById("activity-members").value;
             const loc = document.getElementById("activity-loc").value;
 
+            // Track submission in Google Analytics
+            trackEvent("booking_form_submit", {
+                form_type: "activity",
+                activity_type: type,
+                activity_subtype: subtype,
+                group_size: members,
+            });
+
             const message =
                 `*Tripdhara Booking Inquiry - Activity*\n\n` +
                 `• *Client Name:* ${name}\n` +
@@ -566,6 +602,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const date = document.getElementById("package-date").value;
             const days = document.getElementById("package-days").value;
             const members = document.getElementById("package-members").value;
+
+            // Track submission in Google Analytics
+            trackEvent("booking_form_submit", {
+                form_type: "package",
+                package_type: type,
+                duration_days: days,
+                group_size: members,
+            });
 
             const message =
                 `*Tripdhara Booking Inquiry - Tour Package*\n\n` +
@@ -823,4 +867,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch once on load
     fetchLiveWeather();
+
+    // 16. Google Analytics Click Tracking for Custom Events
+    // Floating WhatsApp Widget (reusing the already declared waWidget)
+    if (waWidget) {
+        waWidget.addEventListener("click", () => {
+            trackEvent("whatsapp_chat_click", {
+                button_position: "floating_widget",
+            });
+        });
+    }
+
+    // Hero Section CTAs
+    const heroPrimary = document.querySelector(".hero-actions .btn-primary");
+    if (heroPrimary) {
+        heroPrimary.addEventListener("click", () => {
+            trackEvent("hero_button_click", {
+                button_text: "Book Your Journey",
+            });
+        });
+    }
+
+    const heroSecondary = document.querySelector(
+        ".hero-actions .btn-secondary",
+    );
+    if (heroSecondary) {
+        heroSecondary.addEventListener("click", () => {
+            trackEvent("hero_button_click", {
+                button_text: "Explore Services",
+            });
+        });
+    }
+
+    // Navigation and Footer Call Buttons
+    const navCall = document.querySelector(".cta-btn-nav");
+    if (navCall) {
+        navCall.addEventListener("click", () => {
+            trackEvent("phone_call_click", {
+                button_position: "nav_bar",
+            });
+        });
+    }
+
+    // Contact Details Helpline Clicks
+    const contactCall = document.querySelector(".detail-item a[href^='tel:']");
+    if (contactCall) {
+        contactCall.addEventListener("click", () => {
+            trackEvent("phone_call_click", {
+                button_position: "contact_details",
+            });
+        });
+    }
+
+    const contactWhatsApp = document.querySelector(
+        ".detail-item a[href^='https://wa.me']",
+    );
+    if (contactWhatsApp) {
+        contactWhatsApp.addEventListener("click", () => {
+            trackEvent("whatsapp_chat_click", {
+                button_position: "contact_details",
+            });
+        });
+    }
 });
