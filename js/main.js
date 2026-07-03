@@ -4,12 +4,6 @@
 function trackEvent(eventName, params = {}) {
     if (typeof gtag === "function") {
         gtag("event", eventName, params);
-    } else {
-        console.log(
-            "Analytics blocked or not loaded. Event:",
-            eventName,
-            params,
-        );
     }
 }
 
