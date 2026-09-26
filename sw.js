@@ -1,4 +1,4 @@
-const CACHE_NAME = "tripdhara-cache-v15";
+const CACHE_NAME = "tripdhara-cache-v16";
 const urlsToCache = [
     "/",
     "/index.html",
@@ -26,6 +26,7 @@ const urlsToCache = [
     "/assets/css/style.css",
     "/assets/js/components.js",
     "/assets/js/main.js",
+    "/assets/favicon/site.webmanifest",
 ];
 
 // Install service worker and cache core static assets
