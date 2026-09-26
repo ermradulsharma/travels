@@ -1,4 +1,4 @@
-const CACHE_NAME = "tripdhara-cache-v14";
+const CACHE_NAME = "tripdhara-cache-v15";
 const urlsToCache = [
     "/",
     "/index.html",
@@ -24,11 +24,13 @@ const urlsToCache = [
     "/faq/index.html",
     "/404.html",
     "/assets/css/style.css",
+    "/assets/js/components.js",
     "/assets/js/main.js",
 ];
 
 // Install service worker and cache core static assets
 self.addEventListener("install", (event) => {
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(urlsToCache);
@@ -73,7 +75,7 @@ self.addEventListener("fetch", (event) => {
                 })
                 .catch(() => {
                     // Fallback to cache if offline
-                    return caches.match("index.html") || caches.match("/");
+                    return caches.match("/index.html") || caches.match("/");
                 }),
         );
         return;
