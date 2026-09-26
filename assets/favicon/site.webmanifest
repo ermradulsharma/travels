@@ -12,13 +12,13 @@
     "categories": ["travel", "sports", "lifestyle"],
     "icons": [
         {
-            "src": "/favicon/web-app-manifest-192x192.png?v=20260617",
+            "src": "/assets/favicon/web-app-manifest-192x192.png?v=20260617",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "/favicon/web-app-manifest-512x512.png?v=20260617",
+            "src": "/assets/favicon/web-app-manifest-512x512.png?v=20260617",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"

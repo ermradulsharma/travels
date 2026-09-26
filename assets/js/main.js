@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tabContentData = {
         accommodation: {
-            image: 'url("assets/images/luxury_resort.png")',
+            image: 'url("/assets/images/luxury_resort.png")',
             tagline: "Premium Stays & Resorts",
             title: "Handpicked Mountain Lodges",
             desc: "Escape to personally pre-inspected cozy homestays, premium wooden cottages, and luxury valley resorts with stunning peak views.",
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
         },
         activity: {
-            image: 'url("assets/images/hero_background.png")',
+            image: 'url("/assets/images/hero_background.png")',
             tagline: "Adrenaline & Outdoors",
             title: "Conquer the Himalayan Wilds",
             desc: "Engage in thrilling activities led by certified local instructors: white-water rafting in Rishikesh, paragliding in Bir Billing, or trekking to the highest temple in Tungnath.",
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
         },
         travel: {
-            image: 'url("assets/images/adventure_bike.png")',
+            image: 'url("/assets/images/adventure_bike.png")',
             tagline: "Mountain Transit Services",
             title: "Ride Free or Relax in Comfort",
             desc: "Navigate winding passes on a rugged Royal Enfield Himalayan 450, or sit back in a luxury SUV driven by a veteran mountain chauffeur.",
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
         },
         package: {
-            image: 'url("assets/images/scenic_landscape.avif")',
+            image: 'url("/assets/images/scenic_landscape.avif")',
             tagline: "Bespoke Tour Packages",
             title: "Curated Himalayan Journeys",
             desc: "Embark on the sacred Chardham pilgrimage or request a custom adventure itinerary tailored by local experts to match your group size and pace.",
@@ -134,7 +134,23 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     };
 
-    tabButtons.forEach((button) => {
+    const tabButtonsArray = Array.from(tabButtons);
+    tabButtonsArray.forEach((button, index) => {
+        // Keyboard accessibility for tab controls (Arrow keys)
+        button.addEventListener("keydown", (e) => {
+            let targetIndex = null;
+            if (e.key === "ArrowRight") {
+                targetIndex = (index + 1) % tabButtonsArray.length;
+            } else if (e.key === "ArrowLeft") {
+                targetIndex = (index - 1 + tabButtonsArray.length) % tabButtonsArray.length;
+            }
+            if (targetIndex !== null) {
+                e.preventDefault();
+                tabButtonsArray[targetIndex].focus();
+                tabButtonsArray[targetIndex].click();
+            }
+        });
+
         button.addEventListener("click", () => {
             // Remove active class and update ARIA attributes from all buttons and contents
             tabButtons.forEach((btn) => {
@@ -190,6 +206,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // Auto-select tab based on URL search param or hash (e.g. ?tab=travel)
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get("tab") || window.location.hash.replace("#", "");
+    if (tabParam) {
+        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabParam}"]`);
+        if (targetBtn) {
+            targetBtn.click();
+        }
+    }
 
     // 3.5. Enhanced Booking Widget Helpers (Counters, Dynamic Selects, Suggestion Pills)
 
@@ -619,11 +645,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // WhatsApp Redirect Helper
+    // WhatsApp Redirect Helper with popup blocker fallback
     function sendWhatsAppInquiry(textMessage) {
         const encodedText = encodeURIComponent(textMessage);
         const waUrl = `https://wa.me/${recipientPhone}?text=${encodedText}`;
-        window.open(waUrl, "_blank", "noopener,noreferrer");
+        const newWin = window.open(waUrl, "_blank", "noopener,noreferrer");
+        if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+            window.location.href = waUrl;
+        }
     }
 
     // 10. FAQ Accordion Collapse/Expand logic
@@ -654,12 +683,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 11. Trending Routes Card Click Autofill Action
-    const routeCards = document.querySelectorAll(".route-card");
-    routeCards.forEach((card) => {
-        card.addEventListener("click", () => {
+    // 11. Trending Routes & Gallery Cards Click / Keyboard Autofill Action
+    const interactiveCards = document.querySelectorAll(".route-card, .gallery-card");
+    interactiveCards.forEach((card) => {
+        const handleCardAction = (e) => {
+            // If the user clicked an explicit inner link or button, allow default navigation
+            if (e && e.target && e.target.closest("a, button")) {
+                return;
+            }
+
             const service = card.getAttribute("data-service");
             const targetRouteValue = card.getAttribute("data-target");
+            const customDest = card.getAttribute("data-dest");
+
+            if (!service) return;
+
+            const bookingSec = document.getElementById("booking");
+            // If booking section doesn't exist on this subpage, redirect to home page booking section
+            if (!bookingSec) {
+                window.location.href = `/#booking?tab=${service}`;
+                return;
+            }
 
             // Find matching tab button and trigger click to switch
             const tabBtn = document.querySelector(
@@ -669,52 +713,89 @@ document.addEventListener("DOMContentLoaded", () => {
                 tabBtn.click();
             }
 
+            // Helper function to set select value with option matching fallback
+            const setSelectValue = (selectEl, val) => {
+                if (!selectEl || !val) return;
+                // Try direct assignment
+                selectEl.value = val;
+                if (selectEl.value === val) {
+                    selectEl.dispatchEvent(new Event("change"));
+                    return;
+                }
+                // Try case-insensitive or substring matching fallback
+                const options = Array.from(selectEl.options);
+                const matchedOpt = options.find((opt) =>
+                    opt.value.toLowerCase().includes(val.toLowerCase()) ||
+                    val.toLowerCase().includes(opt.value.toLowerCase())
+                );
+                if (matchedOpt) {
+                    selectEl.value = matchedOpt.value;
+                    selectEl.dispatchEvent(new Event("change"));
+                }
+            };
+
+            // Helper function to flash glowing highlight on autofilled inputs
+            const highlightInput = (inputEl) => {
+                if (!inputEl) return;
+                inputEl.style.transition = "all 0.3s ease";
+                inputEl.style.borderColor = "var(--primary)";
+                inputEl.style.boxShadow = "0 0 14px rgba(245, 166, 35, 0.45)";
+                setTimeout(() => {
+                    inputEl.style.borderColor = "";
+                    inputEl.style.boxShadow = "";
+                }, 1800);
+            };
+
             // Autofill the input field based on the service
             if (service === "travel") {
                 const typeSelect = document.getElementById("travel-type");
-                if (typeSelect) {
-                    typeSelect.value = targetRouteValue;
-                }
+                setSelectValue(typeSelect, targetRouteValue);
+
                 const routeInput = document.getElementById("travel-route");
                 if (routeInput) {
-                    if (targetRouteValue === "Chauffeur-driven Car") {
+                    if (customDest) {
+                        routeInput.value = customDest;
+                    } else if (targetRouteValue === "Chauffeur-driven Car") {
                         routeInput.value =
                             "Dehradun to Mussoorie, Landour & Dhanaulti";
                     } else if (targetRouteValue === "Bike Rental") {
                         routeInput.value =
                             "Rishikesh to Chopta, Tungnath & Sari Village";
                     }
+                    highlightInput(routeInput);
                 }
             } else if (service === "accommodation") {
-                const typeSelect =
-                    document.getElementById("accommodation-type");
-                if (typeSelect) {
-                    typeSelect.value = targetRouteValue;
-                }
+                const typeSelect = document.getElementById("accommodation-type");
+                setSelectValue(typeSelect, targetRouteValue);
+
                 const destInput = document.getElementById("accommodation-dest");
                 if (destInput) {
-                    destInput.value = "Mukteshwar / Manali";
+                    destInput.value = customDest || "Mukteshwar / Manali";
+                    highlightInput(destInput);
                 }
             } else if (service === "activity") {
                 const typeSelect = document.getElementById("activity-type");
-                if (typeSelect) {
-                    typeSelect.value = targetRouteValue;
-                }
+                setSelectValue(typeSelect, targetRouteValue);
+
                 const locInput = document.getElementById("activity-loc");
                 if (locInput) {
-                    locInput.value = "Chopta / Rishikesh";
+                    locInput.value = customDest || "Chopta / Rishikesh";
+                    highlightInput(locInput);
                 }
             } else if (service === "package") {
                 const typeSelect = document.getElementById("package-type");
-                if (typeSelect) {
-                    typeSelect.value = targetRouteValue;
-                }
+                setSelectValue(typeSelect, targetRouteValue);
             }
 
             // Scroll smoothly to the booking section
-            const bookingSec = document.getElementById("booking");
-            if (bookingSec) {
-                bookingSec.scrollIntoView({ behavior: "smooth" });
+            bookingSec.scrollIntoView({ behavior: "smooth" });
+        };
+
+        card.addEventListener("click", handleCardAction);
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleCardAction(e);
             }
         });
     });
@@ -722,13 +803,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // 12. Floating WhatsApp Widget Scroll-entry control
     const waWidget = document.querySelector(".whatsapp-float-widget");
     if (waWidget) {
-        window.addEventListener("scroll", () => {
+        const updateWaVisibility = () => {
             if (window.scrollY > 300) {
                 waWidget.classList.add("visible");
             } else {
                 waWidget.classList.remove("visible");
             }
-        });
+        };
+        window.addEventListener("scroll", updateWaVisibility);
+        updateWaVisibility(); // Run immediately on load
     }
 
     // 13. Dynamic Hero Text Typer
@@ -744,7 +827,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const typerSpan = document.getElementById("typer-text");
 
     function typeEffect() {
-        if (!typerSpan) return;
+        if (!typerSpan || !document.body.contains(typerSpan)) return;
         const currentWord = words[wordIndex];
         if (isDeleting) {
             typerSpan.textContent = currentWord.substring(0, charIndex - 1);
@@ -767,37 +850,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(typeEffect, speed);
     }
-    typeEffect();
+    if (typerSpan) typeEffect();
 
     // 14. Back to Top Button with Scroll Progress
     const backToTopBtn = document.getElementById("back-to-top");
-    const circle = document.querySelector(".progress-ring__circle");
-    if (backToTopBtn && circle) {
-        const radius = circle.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
+    if (backToTopBtn) {
+        const circle = document.querySelector(".progress-ring__circle");
+        let circumference = 0;
 
-        window.addEventListener("scroll", () => {
-            const scrollPercent =
-                window.scrollY /
-                (document.documentElement.scrollHeight - window.innerHeight);
-            const offset = circumference - scrollPercent * circumference;
-            circle.style.strokeDashoffset = isNaN(offset)
-                ? circumference
-                : offset;
+        if (circle && circle.r && circle.r.baseVal) {
+            const radius = circle.r.baseVal.value;
+            circumference = 2 * Math.PI * radius;
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference;
+        }
+
+        const updateBackToTop = () => {
+            if (circle && circumference > 0) {
+                const scrollTop = window.scrollY;
+                const docHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+                const offset = circumference - scrollPercent * circumference;
+                circle.style.strokeDashoffset = offset < 0 ? 0 : offset;
+            }
 
             if (window.scrollY > 300) {
                 backToTopBtn.classList.add("visible");
             } else {
                 backToTopBtn.classList.remove("visible");
             }
-        });
+        };
+
+        window.addEventListener("scroll", updateBackToTop);
+        updateBackToTop(); // Check on load
 
         backToTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
 
-    // 15. Himalayan Live Weather status fetch (Open-Meteo API)
+    // 15. Himalayan Live Weather status fetch (Open-Meteo API) - Cached & Optimized
     async function fetchLiveWeather() {
         const locations = [
             {
@@ -821,18 +914,60 @@ document.addEventListener("DOMContentLoaded", () => {
             { name: "Auli", lat: 30.5284, lon: 79.567, id: "weather-auli" },
         ];
 
-        for (const loc of locations) {
+        // 1. Guard check: only run network requests if weather elements exist on current page
+        const hasWeatherElements = locations.some((loc) =>
+            document.getElementById(loc.id),
+        );
+        if (!hasWeatherElements) return;
+
+        // 2. Check local storage cache (valid for 30 minutes)
+        const CACHE_KEY = "tripdhara_weather_cache";
+        const CACHE_TIME_KEY = "tripdhara_weather_timestamp";
+        const now = Date.now();
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+
+        function updateWeatherUI(dataObj) {
+            Object.keys(dataObj).forEach((id) => {
+                const item = dataObj[id];
+                const container = document.getElementById(id);
+                if (container) {
+                    const tempSpan = container.querySelector(".temp-val");
+                    const condSpan = container.querySelector(".cond-text");
+                    if (tempSpan) tempSpan.textContent = `${item.temp}° C`;
+                    if (condSpan) condSpan.textContent = item.condition;
+                }
+            });
+        }
+
+        // Use cache if fresh (< 30 mins)
+        if (cachedData && cachedTime && now - parseInt(cachedTime) < 30 * 60 * 1000) {
+            try {
+                updateWeatherUI(JSON.parse(cachedData));
+                return;
+            } catch (e) {
+                // Ignore parse errors and fetch fresh
+            }
+        }
+
+        // 3. Fetch fresh weather with timeout and fallback to cache
+        const newCache = {};
+        const weatherPromises = locations.map(async (loc) => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 4000);
+
             try {
                 const response = await fetch(
                     `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current=temperature_2m,weather_code`,
+                    { signal: controller.signal },
                 );
+                clearTimeout(timeoutId);
                 if (!response.ok) throw new Error("API error");
                 const data = await response.json();
 
                 const temp = Math.round(data.current.temperature_2m);
                 const code = data.current.weather_code;
 
-                // Map weather codes to weather emoji and text
                 let condition = "☀️ Sunny";
                 if (code >= 1 && code <= 3) condition = "☁️ Cloudy";
                 else if (code === 45 || code === 48) condition = "🌫️ Foggy";
@@ -841,25 +976,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 else if (code >= 80 && code <= 82) condition = "🌦️ Showers";
                 else if (code >= 95) condition = "⛈️ Stormy";
 
-                const container = document.getElementById(loc.id);
-                if (container) {
-                    const tempSpan = container.querySelector(".temp-val");
-                    const condSpan = container.querySelector(".cond-text");
-                    if (tempSpan) tempSpan.textContent = `${temp}° C`;
-                    if (condSpan) condSpan.textContent = condition;
-                }
+                newCache[loc.id] = { temp, condition };
             } catch (err) {
-                console.error(`Error fetching weather for ${loc.name}:`, err);
-                const container = document.getElementById(loc.id);
-                if (container) {
-                    const condSpan = container.querySelector(".cond-text");
-                    if (condSpan) condSpan.textContent = "N/A";
-                }
+                clearTimeout(timeoutId);
+                console.warn(`Weather fetch bypassed for ${loc.name}:`, err.message);
             }
+        });
+
+        await Promise.allSettled(weatherPromises);
+
+        if (Object.keys(newCache).length > 0) {
+            updateWeatherUI(newCache);
+            localStorage.setItem(CACHE_KEY, JSON.stringify(newCache));
+            localStorage.setItem(CACHE_TIME_KEY, now.toString());
+        } else if (cachedData) {
+            // Fallback to expired cache if offline
+            try {
+                updateWeatherUI(JSON.parse(cachedData));
+            } catch (e) {}
         }
     }
 
-    // Fetch once on load
+    // Fetch once on load if weather section exists
     fetchLiveWeather();
 
     // 16. Google Analytics Click Tracking for Custom Events
