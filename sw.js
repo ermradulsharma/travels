@@ -29,13 +29,19 @@ const urlsToCache = [
     "/assets/favicon/site.webmanifest",
 ];
 
-// Install service worker and cache core static assets
+// Install service worker and cache core static assets safely
 self.addEventListener("install", (event) => {
     self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(urlsToCache);
-        }),
+            return Promise.allSettled(
+                urlsToCache.map((url) =>
+                    cache.add(url).catch((err) => {
+                        console.warn(`[SW] Failed to cache asset: ${url}`, err);
+                    })
+                )
+            );
+        })
     );
 });
 
@@ -48,17 +54,17 @@ self.addEventListener("activate", (event) => {
                     if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
-                }),
+                })
             );
-        }),
+        })
     );
     return self.clients.claim();
 });
 
 // Intercept requests and implement hybrid caching
 self.addEventListener("fetch", (event) => {
-    // Only cache GET requests
-    if (event.request.method !== "GET") return;
+    // Only intercept HTTP/HTTPS GET requests (ignore chrome-extension://, etc.)
+    if (event.request.method !== "GET" || !event.request.url.startsWith("http")) return;
 
     // 1. Navigation requests (HTML pages) -> Network-First
     if (event.request.mode === "navigate") {
@@ -74,10 +80,14 @@ self.addEventListener("fetch", (event) => {
                     }
                     return networkResponse;
                 })
-                .catch(() => {
+                .catch(async () => {
                     // Fallback to cache if offline
-                    return caches.match("/index.html") || caches.match("/");
-                }),
+                    const cachedPage = await caches.match(event.request);
+                    if (cachedPage) return cachedPage;
+                    const indexPage = await caches.match("/index.html");
+                    if (indexPage) return indexPage;
+                    return caches.match("/");
+                })
         );
         return;
     }
@@ -120,6 +130,6 @@ self.addEventListener("fetch", (event) => {
                 .catch(() => {
                     // Fail gracefully
                 });
-        }),
+        })
     );
 });
