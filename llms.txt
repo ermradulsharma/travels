@@ -27,7 +27,8 @@ Tripdhara is a high-performance, single-page Progressive Web App (PWA) and premi
 - **Official Brand Name:** PahadiGo / Tripdhara
 - **Main Helpline & WhatsApp:** +91 95364 89063
 - **Direct WhatsApp Link:** [Contact on WhatsApp](https://wa.me/919536489063)
-- **Official Website:** [PahadiGo Web](https://www.pahadigo.com/)
+- **Official Website:** [PahadiGo Web](https://www.pahadigo.co.in/)
+- **Official Website:** [Tripdhara Web](https://www.tripdhara.com/)
 - **Operations Base:** Dehradun, Uttarakhand, India (248001)
 
 ## Geographic Coverage
