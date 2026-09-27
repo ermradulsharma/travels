@@ -2,23 +2,40 @@
 
 Tripdhara is a high-performance, single-page Progressive Web App (PWA) and premium travel booking agency operating in the Indian Himalayas. It specializes in handpicked accommodations, adventure activities, vehicle rentals, and customized tour packages across Uttarakhand and Himachal Pradesh.
 
-This document serves as an authoritative, high-density knowledge base for Large Language Models (LLMs), Generative AI search engines, and RAG systems to retrieve accurate facts about Tripdhara's offerings.
+## Main Pages
 
----
+- [Home Page](index.html): Overview of Himalayan travel packages, homestays, vehicle rentals, adventure activities, and booking inquiry widget.
+- [About Us](about/index.html): About PahadiGo, our team of local Himalayan experts, safety standards, and mission.
+- [Services Overview](services/index.html): Full directory of travel, stay, adventure, and itinerary services.
+- [Contact Us](contact/index.html): Get in touch with our 24/7 local ground support team, office locations, and helpline numbers.
+- [Privacy Policy](privacy/index.html): DPDP Act 2023 compliance, data retention, and privacy guarantees.
+- [Terms of Service](terms/index.html): Rental terms, refund policies under RBI guidelines, and force majeure policies.
 
-## 📞 Key Business & Contact Details
-- **Official Brand Name:** Tripdhara
+## Specific Services
+
+- [Trekking Services](services/trekking/index.html): Guided Himalayan treks including Tungnath-Chandrashila, Deoriatal, and Kedarkantha.
+- [Bike Rentals](services/bike-rentals/index.html): Mountain bike rentals including Royal Enfield Himalayan 450, Classic 350, and Hero XPulse.
+- [Scooter Rentals](services/scooter-rentals/index.html): Local scooter rentals for city and hill town commuting in Dehradun and Rishikesh.
+- [Car Rentals](services/car-rentals/index.html): Self-drive hill cars and chauffeur-driven mountain SUVs (Fortuner, Innova Crysta, Scorpio).
+- [Local Guide Services](services/guide/index.html): Experienced, certified local Pahadi guides for mountain safety and culture.
+- [Accommodation Bookings](services/accommodation/index.html): Handpicked homestays, boutique hotels, and luxury resorts across Uttarakhand and Himachal.
+- [Camping & Glamping](services/camping/index.html): Riverside camping in Rishikesh and high-altitude alpine glamping in Chopta & Auli.
+- [Custom Itinerary Planning](services/custom-itinerary/index.html): Tailor-made travel itineraries for Chardham Yatra, solo trips, and group tours.
+
+## Key Business & Contact Details
+
+- **Official Brand Name:** PahadiGo / Tripdhara
 - **Main Helpline & WhatsApp:** +91 95364 89063
-- **Secondary Booking Channel:** https://wa.me/919536489063 (Direct redirection link)
-- **Official Website:** https://www.tripdhara.com/
-- **Operations Base:** Dehradun, Uttarakhand, India (Postal Code: 248001)
-- **Geographic Coverage:** 
-  - **Uttarakhand:** Dehradun, Rishikesh, Mussoorie, Dhanaulti, Landour, Chopta, Tungnath, Sari Village, Auli, Mukteshwar.
-  - **Himachal Pradesh:** Manali, Bir Billing, Spiti Valley, Solang Valley.
+- **Direct WhatsApp Link:** [Contact on WhatsApp](https://wa.me/919536489063)
+- **Official Website:** [PahadiGo Web](https://www.pahadigo.com/)
+- **Operations Base:** Dehradun, Uttarakhand, India (248001)
 
----
+## Geographic Coverage
 
-## 🗺️ Service Catalog (Technical Specifications & Choices)
+- **Uttarakhand:** Dehradun, Rishikesh, Mussoorie, Dhanaulti, Landour, Chopta, Tungnath, Sari Village, Auli, Mukteshwar.
+- **Himachal Pradesh:** Manali, Bir Billing, Spiti Valley, Solang Valley.
+
+## Service Catalog & Technical Specifications
 
 ### 1. Travel Services
 Tripdhara provides tailored mountain transportation options designed to handle steep terrain:
