@@ -18,8 +18,8 @@
     --whatsapp-green-hover: #1ebd56;
 
     --text-primary: #f8faf9;
-    --text-secondary: #9cb1aa;
-    --text-muted: #627770;
+    --text-secondary: #b0c4bc;
+    --text-muted: #8ca49c;
 
     --font-heading: "Outfit", sans-serif;
     --font-body: "Inter", sans-serif;
@@ -2677,6 +2677,18 @@ section {
     direction: ltr;
 }
 
+.footer-links-group h2,
+.footer-links-group h3,
+.footer-links-group h5,
+.footer-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.detail-text-wrapper h2,
 .detail-text-wrapper h3 {
     font-family: var(--font-heading);
     font-size: 2.2rem;
@@ -2685,28 +2697,9 @@ section {
     font-weight: 700;
 }
 
-.detail-text-wrapper .detail-tagline {
-    display: block;
-    color: var(--primary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.detail-text-wrapper p {
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.detail-benefits {
-    margin-bottom: 25px;
-}
-
+.detail-benefits h3,
 .detail-benefits h4,
+.detail-safety-info h3,
 .detail-safety-info h4 {
     font-size: 1.1rem;
     color: var(--text-primary);

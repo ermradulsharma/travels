@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="footer-links-group">
-                    <h5>Explore</h5>
+                    <h3 class="footer-title">Explore</h3>
                     <ul class="footer-links">
                         <li><a href="${accommodationLink}">Accommodation</a></li>
                         <li><a href="${activitiesLink}">Activities</a></li>
@@ -118,7 +118,7 @@
                 </div>
 
                 <div class="footer-links-group">
-                    <h5>Policies &amp; Legal</h5>
+                    <h3 class="footer-title">Policies &amp; Legal</h3>
                     <ul class="footer-links">
                         <li><a href="${termsLink}">Terms &amp; Conditions</a></li>
                         <li><a href="${privacyLink}">Privacy Policy</a></li>
@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="footer-links-group">
-                    <h5>Contact</h5>
+                    <h3 class="footer-title">Contact</h3>
                     <ul class="footer-links">
                         <li>Phone: +91 95364 89063</li>
                         <li>Address: Dehradun, Uttarakhand, India</li>
