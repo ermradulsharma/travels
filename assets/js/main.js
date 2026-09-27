@@ -15,8 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (mobileToggle && navMenu) {
         mobileToggle.addEventListener("click", () => {
+            const isOpen = navMenu.classList.toggle("open");
             mobileToggle.classList.toggle("open");
-            navMenu.classList.toggle("open");
+            mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
         });
 
         // Close mobile menu when clicking any nav link
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             link.addEventListener("click", () => {
                 mobileToggle.classList.remove("open");
                 navMenu.classList.remove("open");
+                mobileToggle.setAttribute("aria-expanded", "false");
             });
         });
 
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             logoLink.addEventListener("click", () => {
                 mobileToggle.classList.remove("open");
                 navMenu.classList.remove("open");
+                mobileToggle.setAttribute("aria-expanded", "false");
             });
         }
     }
@@ -55,9 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cache offsets on load and update them on resize to avoid reading offsetTop on scroll
+    // Cache offsets on load and update them on resize & full page load to avoid reading offsetTop on scroll
     cacheSectionOffsets();
     window.addEventListener("resize", cacheSectionOffsets);
+    window.addEventListener("load", cacheSectionOffsets);
 
     window.addEventListener("scroll", () => {
         // Sticky Header effect via class toggle
@@ -373,9 +377,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function validatePhone(phone) {
-        const cleanPhone = phone.replace(/[\s\-\(\)]/g, "");
-        const phoneRegex = /^(?:\+?91|0)?[6-9]\d{9}$/;
-        return phoneRegex.test(cleanPhone);
+        const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, "");
+        // International phone number validation: between 7 and 15 digits (E.164 compliant)
+        return /^\d{7,15}$/.test(cleanPhone);
     }
 
     [
@@ -383,13 +387,14 @@ document.addEventListener("DOMContentLoaded", () => {
         "accommodation-phone",
         "activity-phone",
         "package-phone",
+        "contact-phone",
     ].forEach((id) => {
         const input = document.getElementById(id);
         if (input) {
             input.addEventListener("input", () => {
                 if (input.value && !validatePhone(input.value)) {
                     input.setCustomValidity(
-                        "Please enter a valid 10-digit mobile number.",
+                        "Please enter a valid phone number with country code (e.g. +1 555 123 4567 or +91 95364 89063).",
                     );
                 } else {
                     input.setCustomValidity("");

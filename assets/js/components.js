@@ -65,7 +65,7 @@
                         </svg>
                         <span class="cta-text-nav">+91 95364 89063</span>
                     </a>
-                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>

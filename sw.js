@@ -1,4 +1,4 @@
-const CACHE_NAME = "tripdhara-cache-v16";
+const CACHE_NAME = "tripdhara-cache-v17";
 const urlsToCache = [
     "/",
     "/index.html",
@@ -56,9 +56,8 @@ self.addEventListener("activate", (event) => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
-    return self.clients.claim();
 });
 
 // Intercept requests and implement hybrid caching
@@ -81,12 +80,12 @@ self.addEventListener("fetch", (event) => {
                     return networkResponse;
                 })
                 .catch(async () => {
-                    // Fallback to cache if offline
-                    const cachedPage = await caches.match(event.request);
+                    // Fallback to cache if offline (ignore query parameters)
+                    const cachedPage = await caches.match(event.request, { ignoreSearch: true });
                     if (cachedPage) return cachedPage;
-                    const indexPage = await caches.match("/index.html");
+                    const indexPage = await caches.match("/index.html", { ignoreSearch: true });
                     if (indexPage) return indexPage;
-                    return caches.match("/");
+                    return caches.match("/", { ignoreSearch: true });
                 })
         );
         return;
@@ -94,7 +93,7 @@ self.addEventListener("fetch", (event) => {
 
     // 2. Static resources (CSS, JS, Images, Fonts) -> Cache-First
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
+        caches.match(event.request, { ignoreSearch: true }).then((cachedResponse) => {
             if (cachedResponse) {
                 return cachedResponse;
             }
