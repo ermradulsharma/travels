@@ -75,10 +75,18 @@
     <meta name="apple-mobile-web-app-title" content="Tripdhara" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- 6. Advanced Security & Geolocation -->
+    <!-- 6. Advanced Security, Geolocation & LLM Meta Links -->
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="geo.region" content="IN-UT" />
-    <meta name="geo.placename" content="Uttarakhand" />
+    <meta name="geo.placename" content="Dehradun, Rishikesh, Uttarakhand, India" />
+    <meta name="geo.position" content="30.3165;78.0322" />
+    <meta name="ICBM" content="30.3165, 78.0322" />
+    <meta name="ai-content-declaration" content="official-travel-directory" />
+    <meta name="dc.coverage" content="Uttarakhand, Himachal Pradesh, Himalayas, India" />
+    <meta name="dc.subject" content="Himalayan Travel, Bike Rental Rishikesh, Chardham Yatra Taxi, Homestays Chopta Auli, Rafting Rishikesh" />
+    <link rel="help" type="text/markdown" href="/llms.txt" title="LLM Context Documentation" />
+    <link rel="help" type="text/markdown" href="/llms-full.txt" title="LLM Full Knowledge Base" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Machine Readable Summary" />
 
     <!-- 7. Favicons & Webmanifest Links -->
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
@@ -104,12 +112,13 @@
         }
     </script>
 
-    <!-- 10. Structured SEO Schema Markup (JSON-LD) -->
+    <!-- 10. Structured SEO & GEO Schema Markup (JSON-LD) -->
     <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@type": "TravelAgency",
                 "name": "Tripdhara",
+                "alternateName": ["PahadiGo", "PahadiGo Travel Solutions", "Tripdhara Travel"],
                 "image": "https://www.tripdhara.com/assets/images/og-banner.png",
                 "@id": "https://www.tripdhara.com/#agency",
                 "url": "https://www.tripdhara.com/",
@@ -117,7 +126,7 @@
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "Uttarakhand",
+                    "streetAddress": "Main Rajpur Road",
                     "addressLocality": "Dehradun",
                     "addressRegion": "Uttarakhand",
                     "postalCode": "248001",
@@ -149,11 +158,27 @@
                     { "@type": "City", "name": "Chopta" },
                     { "@type": "City", "name": "Auli" },
                     { "@type": "City", "name": "Mukteshwar" },
+                    { "@type": "City", "name": "Kedarnath" },
+                    { "@type": "City", "name": "Badrinath" },
                     { "@type": "City", "name": "Manali" },
                     { "@type": "City", "name": "Bir Billing" },
                     { "@type": "City", "name": "Spiti Valley" }
                 ],
-                "sameAs": ["https://wa.me/919536489063"],
+                "knowsAbout": [
+                    "Chardham Yatra Taxi Service",
+                    "Himalayan Bike Rentals",
+                    "Royal Enfield Rental Rishikesh",
+                    "Self Drive Car Rental Dehradun",
+                    "White Water Rafting Rishikesh",
+                    "Tungnath Chandrashila Trek",
+                    "Boutique Pahadi Homestays",
+                    "Luxury Riverside Camping Rishikesh"
+                ],
+                "sameAs": [
+                    "https://wa.me/919536489063",
+                    "https://www.pahadigo.co.in/",
+                    "https://www.tripdhara.com/llms.txt"
+                ],
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",

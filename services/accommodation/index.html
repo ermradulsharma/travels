@@ -19,6 +19,13 @@
     <meta name="twitter:title" content="Mountain Accommodations - Tripdhara" />
     <meta name="twitter:description" content="Book verified local homestays, hotels, and riverside camping in Uttarakhand and Himachal Pradesh." />
     <meta name="twitter:image" content="https://www.tripdhara.com/assets/images/og-banner.png" />
+    <link rel="help" type="text/markdown" href="/llms.txt" title="LLM Context Documentation" />
+    <link rel="help" type="text/markdown" href="/llms-full.txt" title="LLM Full Knowledge Base" />
+    <meta name="geo.region" content="IN-UT" />
+    <meta name="geo.placename" content="Dehradun, Rishikesh, Uttarakhand, India" />
+    <meta name="geo.position" content="30.3165;78.0322" />
+    <meta name="ICBM" content="30.3165, 78.0322" />
+    <meta name="ai-content-declaration" content="official-travel-directory" />
     <link rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" />
@@ -40,18 +47,35 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.tripdhara.com/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Accommodation",
-        "item": "https://www.tripdhara.com/services/accommodation/"
-      }]
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.tripdhara.com/"
+          },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Accommodation",
+            "item": "https://www.tripdhara.com/services/accommodation/"
+          }]
+        },
+        {
+          "@type": "Service",
+          "name": "Himalayan Stays & Accommodations",
+          "provider": {
+            "@type": "TravelAgency",
+            "name": "PahadiGo / Tripdhara",
+            "url": "https://www.tripdhara.com/",
+            "telephone": "+919536489063"
+          },
+          "serviceType": "Homestays, Luxury Resorts & Camping",
+          "areaServed": ["Uttarakhand", "Himachal Pradesh", "Mukteshwar", "Chopta", "Auli", "Rishikesh", "Mussoorie", "Manali"],
+          "description": "Pre-verified Pahadi homestays, luxury mountain resorts with Trishul peak views, and riverside luxury camping/glamping."
+        }
+      ]
     }
     </script>
 </head>
